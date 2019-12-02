@@ -1,0 +1,34 @@
+{
+  "id": "8afe591f",
+  "name": "Fill Color Black or White",
+  "version": "0.0.1",
+  "description": "no description",
+  "summary": "Changes the fill color of an object to black or white with keyboard shortcuts.",
+  "languages": ["en"],
+  "author": "Johannes Schweig",
+  "helpUrl": "https://mywebsite.com/help",
+  "host": {
+    "app": "XD",
+    "minVersion": "13.0"
+  },
+  "uiEntryPoints": [
+    {
+      "type": "menu",
+      "label": "Fill Black",
+      "commandId": "fillBlack",
+      "shortcut": {
+        "mac": "Cmd+Shift+b",
+        "win": "Ctrl+Shift+b"
+      }
+    },
+    {
+      "type": "menu",
+      "label": "Fill White",
+      "commandId": "fillWhite",
+      "shortcut": {
+        "mac": "Cmd+Shift+w",
+        "win": "Ctrl+Shift+w"
+      }
+    }
+  ]
+}
