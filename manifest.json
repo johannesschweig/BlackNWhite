@@ -1,7 +1,7 @@
 {
   "id": "8afe591f",
   "name": "Fill Color Black or White",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "no description",
   "summary": "Changes the fill color of an object to black or white with keyboard shortcuts.",
   "languages": ["en"],
