@@ -1,5 +1,5 @@
 # BlackNWhite
-A Plugin for Adobe XD that changes the fill of an object (e.g. rectangle, text,...) to black or white with a keyboard shortcut.
+A Plugin for Adobe XD that changes the fill of the selected object(s) (e.g. rectangle, text,...) to black or white with a keyboard shortcut.
 
 - Black:
 
@@ -13,3 +13,6 @@ A Plugin for Adobe XD that changes the fill of an object (e.g. rectangle, text,.
 
     o Windows: Ctrl+Shift+w
 
+- Rgba:
+
+    o Only available with menu. Paste an rgb or rgba snippet so set the fill of the selected object(s).
