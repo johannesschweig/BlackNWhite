@@ -1,16 +1,16 @@
 const {Color} = require("scenegraph")
 
-const { getRGBA, fill } = require("./utils.js");
+const { getRGBA, fill, findReplaceElements } = require("./utils.js");
 
 // rgba dialog
-let dialog;
+let rgbaDialog;
 //  lazy load the dialog
-function getDialog(selection) {
-  if (dialog == null) {
+function getRGBADialog(selection) {
+  if (rgbaDialog == null) {
     //  create the dialog
-    dialog = document.createElement("dialog");
+    rgbaDialog = document.createElement("dialog");
 
-    dialog.innerHTML = `
+    rgbaDialog.innerHTML = `
       <style>
         label {
           margin: 0 8px;
@@ -34,28 +34,89 @@ function getDialog(selection) {
         </footer>
       </form>
     `
-    document.body.appendChild(dialog)
+    document.body.appendChild(rgbaDialog)
     // register click listeners
     const cancelButton = document.querySelector("#cancel");
-    cancelButton.addEventListener("click", () => dialog.close("reasonCanceled"));
+    cancelButton.addEventListener("click", () => rgbaDialog.close("reasonCanceled"));
     const fillButton = document.querySelector("#fill")
     fillButton.addEventListener("click", evt => {
       evt.preventDefault()
-      dialog.close("ok")
+      rgbaDialog.close("ok")
     })
-    const form = dialog.querySelector("form");
+    const form = rgbaDialog.querySelector("form");
     form.onsubmit = function(evt) {
       evt.preventDefault()
-      dialog.close("ok")
+      rgbaDialog.close("ok")
     }
   }
 
-  return dialog.showModal()
+  return rgbaDialog.showModal()
   .then(result => {
     if (result === 'ok') {
         // fill with rgba color
         let value = document.querySelector("input").value
         fill(selection, new Color(getRGBA(value)))
+    }
+  })
+  .catch(err => {
+    console.error(err.message)
+  })
+}
+
+// text dialog
+let textDialog;
+function getTextDialog(selection) {
+  if (textDialog == null) {
+    //  create the dialog
+    textDialog = document.createElement("dialog");
+
+    textDialog.innerHTML = `
+      <style>
+        label {
+          margin: 0 8px;
+        }
+        input {
+          width: 100%;
+        }
+      </style>
+      <form method="dialog">
+        <h1>
+            <span>Set text</span>
+        </h1>
+        <hr />
+        <p>Write text for elements separated with semicolon (;)</p>
+        <label>
+            <input type="text" placeholder="e.g. 1;2;3;4" />
+        </label>
+        <footer>
+            <button id="cancel" uxp-variant="primary">Cancel</button>
+            <button id="fill" type="submit" uxp-variant="cta">Set text</button>
+        </footer>
+      </form>
+    `
+    document.body.appendChild(textDialog)
+    // register click listeners
+    const cancelButton = document.querySelector("#cancel");
+    cancelButton.addEventListener("click", () => textDialog.close("reasonCanceled"));
+    const fillButton = document.querySelector("#fill")
+    fillButton.addEventListener("click", evt => {
+      evt.preventDefault()
+      textDialog.close("ok")
+    })
+    const form = textDialog.querySelector("form");
+    form.onsubmit = function(evt) {
+      evt.preventDefault()
+      textDialog.close("ok")
+    }
+  }
+
+  return textDialog.showModal()
+  .then(result => {
+    if (result === 'ok') {
+        // set text
+        let value = document.querySelector("input").value
+        let textArr = value.split(';')        
+        findReplaceElements(selection, textArr)
     }
   })
   .catch(err => {
@@ -75,6 +136,7 @@ module.exports = {
   commands: {
     fillBlack: fillBlack,
     fillWhite: fillWhite,
-    fillRGBA: getDialog
+    fillRGBA: getRGBADialog,
+    batchText: getTextDialog
   }
 }

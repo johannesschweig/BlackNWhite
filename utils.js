@@ -42,8 +42,25 @@ function fill(selection, color) {
   }
 }
 
+// replace text in elements
+function findReplaceElements(selection, textArr) {
+  let elements = findElements(selection.items)
+  let i = 0
+  elements.forEach(function (e) {
+    if (e.constructor.name === 'Text') {
+      if (textArr[i]) {
+        e.text = textArr[i]
+        i += 1
+      } else {
+        e.text = textArr[i-1]
+      }
+    }
+  })
+}
+
 module.exports = {
   getRGBA,
-  fill
+  fill,
+  findReplaceElements
 };
 
