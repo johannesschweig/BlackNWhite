@@ -42,10 +42,19 @@ function fill(selection, color) {
   }
 }
 
+// sorting from left to right, top to bottom
+function sortXY(a, b) {
+  let xDiff = a.globalBounds.x - b.globalBounds.x
+  let yDiff = a.globalBounds.y - b.globalBounds.y
+  return yDiff === 0 ? xDiff : yDiff
+}
+
 // replace text in elements
+// the text is applied from left to right, top to bottom
 function findReplaceElements(selection, textArr) {
   let elements = findElements(selection.items)
   let i = 0
+  elements = elements.sort(sortXY)
   elements.forEach(function (e) {
     if (e.constructor.name === 'Text') {
       if (textArr[i]) {
@@ -58,9 +67,61 @@ function findReplaceElements(selection, textArr) {
   })
 }
 
+const rgbaHTML = `
+      <style>
+        label {
+          margin: 0 8px;
+        }
+        input {
+          width: 100%;
+        }
+      </style>
+      <form method="dialog">
+        <h1>
+            <span>Fill with rgba</span>
+        </h1>
+        <hr />
+        <p>Paste the rgb or rgba code copied from your browser</p>
+        <label>
+            <input type="text" placeholder="e.g. rgba(255, 0, 0, 0.3)" />
+        </label>
+        <footer>
+            <button id="cancel" uxp-variant="primary">Cancel</button>
+            <button id="fill" type="submit" uxp-variant="cta">Fill</button>
+        </footer>
+      </form>
+    `
+
+const textHTML = `
+      <style>
+        label {
+          margin: 0 8px;
+        }
+        input {
+          width: 100%;
+        }
+      </style>
+      <form method="dialog">
+        <h1>
+            <span>Set text</span>
+        </h1>
+        <hr />
+        <p>Write text for elements separated with semicolon (;)</p>
+        <label>
+            <input type="text" placeholder="e.g. 1;2;3;4" />
+        </label>
+        <footer>
+            <button id="cancel" uxp-variant="primary">Cancel</button>
+            <button id="fill" type="submit" uxp-variant="cta">Set text</button>
+        </footer>
+      </form>
+    `
+
 module.exports = {
   getRGBA,
   fill,
-  findReplaceElements
+  findReplaceElements,
+  rgbaHTML,
+  textHTML
 };
 

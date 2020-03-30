@@ -38,7 +38,11 @@
     {
       "type": "menu",
       "label": "Set text in selection",
-      "commandId": "batchText"
+      "commandId": "batchText",
+      "shortcut": {
+        "mac": "Cmd+alt+t",
+        "win": "Ctrl+alt+t"
+      }
     }
   ]
 }
