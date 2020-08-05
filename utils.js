@@ -1,3 +1,5 @@
+const {Color} = require("scenegraph")
+
 // returns an rgba object from a string, e.g. rgba(255, 0, 0, 0.3) or rgb(123, 123, 123)
 function getRGBA(str) {
   let r, g, b, a
@@ -87,7 +89,7 @@ const rgbaHTML = `
         </label>
         <footer>
             <button id="cancel" uxp-variant="primary">Cancel</button>
-            <button id="fill" type="submit" uxp-variant="cta">Fill</button>
+            <button id="action" type="submit" uxp-variant="cta">Fill</button>
         </footer>
       </form>
     `
@@ -112,35 +114,61 @@ const textHTML = `
         </label>
         <footer>
             <button id="cancel" uxp-variant="primary">Cancel</button>
-            <button id="fill" type="submit" uxp-variant="cta">Set text</button>
+            <button id="action" type="submit" uxp-variant="cta">Set text</button>
         </footer>
       </form>
     `
 
-const fontColorHTML = `
+function fontColorHTML(selection) {
+  let col = new Color(selection.items[0].fill.value)
+  let aggr = whiteOrBlack(col.toRgba()).aggr
+  let cons = whiteOrBlack(col.toRgba()).cons
+  return `
       <style>
-        label {
-          margin: 0 8px;
-        }
-        input {
-          width: 100%;
-        }
       </style>
       <form method="dialog">
         <h1>
-            <span>Set text</span>
+            <span>Color suggestion for ${col.toHex(true)}</span>
         </h1>
         <hr />
-        <p>Write text for elements separated with semicolon (;)</p>
-        <label>
-            <input type="text" placeholder="e.g. 1;2;3;4" />
-        </label>
+        <p>Aggressive suggestion: ${aggr}</p>
+        <p>Conservative suggestion: ${cons}</p>
         <footer>
-            <button id="cancel" uxp-variant="primary">Cancel</button>
-            <button id="fill" type="submit" uxp-variant="cta">Set text</button>
+            <button id="cancel" uxp-variant="primary">Close</button>
         </footer>
       </form>
     `
+}
+
+
+function whiteOrBlack(col) {
+  //https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+  console.log('c', col)
+  function getLum(c) {
+    c = c / 255.0
+    c = c <= 0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4)
+    return c
+  }
+  let aggr
+  let cons
+  // compute luminance
+  let lum = 0.2126 * getLum(col.r) + 0.7152 * getLum(col.g) + 0.0722 * getLum(col.b)
+  if (col.r*.299 + col.g*.587 + col.b*.114 > 186) {
+    aggr = 'black'
+  } else {
+    aggr = 'white'
+  }
+  if (lum > Math.sqrt(1.05 * 0.05) - 0.05) {
+    cons = 'black'
+  } else {
+    cons = 'white'
+  }
+
+  return {
+    aggr,
+    cons
+  }
+}
 
 module.exports = {
   getRGBA,

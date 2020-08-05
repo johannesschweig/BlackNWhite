@@ -37,6 +37,11 @@
     },
     {
       "type": "menu",
+      "label": "White or black font",
+      "commandId": "fontColor"
+    },
+    {
+      "type": "menu",
       "label": "Set text in selection",
       "commandId": "batchText",
       "shortcut": {
