@@ -1,6 +1,6 @@
 const {Color} = require("scenegraph")
 
-const { getRGBA, fill, findReplaceElements, rgbaHTML, textHTML } = require("./utils.js");
+const { getRGBA, fill, findReplaceElements, rgbaHTML, textHTML, fontColorHTML } = require("./utils.js");
 
 // dialogs
 let dialogs = {
@@ -11,6 +11,10 @@ let dialogs = {
   text: {
     element: null,
     html: textHTML
+  },
+  fontColor: {
+    element: null,
+    html: fontColorHTML
   }
 }
 
@@ -43,9 +47,11 @@ function initDialog(dialog, selection) {
         let value = document.querySelector("input").value
         if (dialog === 'rgba') {
           // fill with rgba color
+          // console.log('rgba', value)
           fill(selection, new Color(getRGBA(value)))
         } else if (dialog === 'text') {
           // set text
+          // console.log('text', value)
           let textArr = value.split(';')        
           findReplaceElements(selection, textArr)
         }
@@ -64,6 +70,10 @@ function getTextDialog(selection) {
   return initDialog('text', selection)
 }
 
+function getFontColorDialog(selection) {
+  return initDialog('fontColor', selection)
+}
+
 function fillBlack(selection) {
   fill(selection, new Color("#000000"))
 }
@@ -77,6 +87,7 @@ module.exports = {
     fillBlack: fillBlack,
     fillWhite: fillWhite,
     fillRGBA: getRGBADialog,
-    batchText: getTextDialog
+    batchText: getTextDialog,
+    fontColor: getFontColorDialog
   }
 }

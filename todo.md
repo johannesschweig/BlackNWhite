@@ -1,5 +1,6 @@
 # TODO
 - add shortcuts for toggling fill/border on/off
+- add a dialog that shows if a backgorund object should be overlayed with white or black text
 
 # DONE
 - added function to set text in selections (v0.05)

@@ -117,11 +117,37 @@ const textHTML = `
       </form>
     `
 
+const fontColorHTML = `
+      <style>
+        label {
+          margin: 0 8px;
+        }
+        input {
+          width: 100%;
+        }
+      </style>
+      <form method="dialog">
+        <h1>
+            <span>Set text</span>
+        </h1>
+        <hr />
+        <p>Write text for elements separated with semicolon (;)</p>
+        <label>
+            <input type="text" placeholder="e.g. 1;2;3;4" />
+        </label>
+        <footer>
+            <button id="cancel" uxp-variant="primary">Cancel</button>
+            <button id="fill" type="submit" uxp-variant="cta">Set text</button>
+        </footer>
+      </form>
+    `
+
 module.exports = {
   getRGBA,
   fill,
   findReplaceElements,
   rgbaHTML,
-  textHTML
+  textHTML,
+  fontColorHTML
 };
 
