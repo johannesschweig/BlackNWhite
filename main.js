@@ -1,6 +1,6 @@
 const {Color} = require("scenegraph")
 
-const { getRGBA, fill, findReplaceElements, rgbaHTML, textHTML, fontColorHTML } = require("./utils.js");
+const { getRGBA, fill, findReplaceElements, rgbaHTML, textHTML, fontColorHTML } = require("./utils.js")
 
 // dialogs
 let dialogs = {
@@ -20,36 +20,27 @@ let dialogs = {
 
 // initalizes dialog
 function initDialog(dialog, selection) {
-  if (dialog === 'fontColor') {
-    dialogs[dialog].html = fontColorHTML(selection)
-  }
+  
   if (dialogs[dialog].element == null) {
     //  create the dialog
-    dialogs[dialog].element = document.createElement("dialog");
-
+    dialogs[dialog].element = document.createElement("dialog")
     dialogs[dialog].element.innerHTML = dialogs[dialog].html
     document.body.appendChild(dialogs[dialog].element)
     // register click listeners
     /// cancel button
-    const cancelButton = document.querySelector("#cancel");
-    cancelButton.addEventListener("click", () => dialogs[dialog].element.close("reasonCanceled"));
+    const cancelButton = document.querySelector("#cancel")
+    cancelButton.addEventListener("click", () => dialogs[dialog].element.close("reasonCanceled"))
     /// action button
-    if (dialog !== 'fontColor') {
-      const actionButton = document.querySelector("#action")
-      actionButton.addEventListener("click", evt => {
-        evt.preventDefault()
-        dialogs[dialog].element.close("ok")
-      })
-    }
-    const form = dialogs[dialog].element.querySelector("form");
+    const actionButton = document.querySelector("#action")
+    actionButton.addEventListener("click", evt => {
+      evt.preventDefault()
+      dialogs[dialog].element.close("ok")
+    })
+    const form = dialogs[dialog].element.querySelector("form")
     form.onsubmit = function(evt) {
       evt.preventDefault()
       dialogs[dialog].element.close("ok")
     }
-  }
-  // fontColorHTML
-  if (dialog === 'fontColor') {
-    dialogs[dialog].element.innerHTML = dialogs[dialog].html
   }
 
   return dialogs[dialog].element.showModal()
@@ -63,7 +54,7 @@ function initDialog(dialog, selection) {
         } else if (dialog === 'text') {
           // set text
           // console.log('text', value)
-          let textArr = value.split(';')        
+          let textArr = value.split('')        
           findReplaceElements(selection, textArr)
         }
     }
@@ -82,7 +73,19 @@ function getTextDialog(selection) {
 }
 
 function getFontColorDialog(selection) {
-  return initDialog('fontColor', selection)
+  let dialog = 'fontColor'
+  dialogs[dialog].html = fontColorHTML(selection)
+  if (dialogs[dialog].element == null) {
+    // create the dialog
+    dialogs[dialog].element = document.createElement("dialog")
+    dialogs[dialog].element.innerHTML = dialogs[dialog].html
+    document.body.appendChild(dialogs[dialog].element)
+  }
+  dialogs[dialog].element.innerHTML = dialogs[dialog].html
+  /// cancel button
+  const cancelButton = document.querySelector("#cancel")
+  cancelButton.addEventListener("click", () => dialogs[dialog].element.close("reasonCanceled"))
+  return dialogs[dialog].element.showModal()
 }
 
 function fillBlack(selection) {

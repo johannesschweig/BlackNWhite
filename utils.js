@@ -125,25 +125,48 @@ function fontColorHTML(selection) {
   let cons = whiteOrBlack(col.toRgba()).cons
   return `
       <style>
+        .rect {
+          height: 32px;
+          width: 32px;
+          background-color: ${col.toHex(true)};
+          margin-bottom: 12px;
+          font-size: 20px;
+          text-align: center;
+          line-height: 32px;
+        }
+
+        .grid {
+          display: grid;
+          grid-columns: 32px 1fr;
+        }
+
+        .agg {
+          color: ${aggr};
+        }
+
+        .cons {
+          color: ${cons};
+        }
       </style>
-      <form method="dialog">
-        <h1>
-            <span>Color suggestion for ${col.toHex(true)}</span>
-        </h1>
+      <div>
+        <h1> Font color </h1>
         <hr />
-        <p>Aggressive suggestion: ${aggr}</p>
-        <p>Conservative suggestion: ${cons}</p>
+        <div class="grid">
+          <span class="rect agg">T</span>
+          <span>Aggressive</span>
+          <span class="rect cons">T</span>
+          <span>Conservative</span>
+        </div>
         <footer>
             <button id="cancel" uxp-variant="primary">Close</button>
         </footer>
-      </form>
+      </div>
     `
 }
 
 
 function whiteOrBlack(col) {
   //https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
-  console.log('c', col)
   function getLum(c) {
     c = c / 255.0
     c = c <= 0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4)
