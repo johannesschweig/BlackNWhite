@@ -54,7 +54,7 @@ function initDialog(dialog, selection) {
         } else if (dialog === 'text') {
           // set text
           // console.log('text', value)
-          let textArr = value.split('')        
+          let textArr = value.split(';')
           findReplaceElements(selection, textArr)
         }
     }
