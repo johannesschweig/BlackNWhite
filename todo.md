@@ -3,6 +3,7 @@
 - add shortcuts for toggling fill/border on/off
 
 # DONE
+- rgba also working if 0 is omitted for opacity (v0.07)
 - replace text working again (v0.06)
 - add a dialog that shows if a backgorund object should be overlayed with white or black text (v0.06)
 - added function to set text in selections (v0.05)

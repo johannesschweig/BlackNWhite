@@ -8,7 +8,9 @@ function getRGBA(str) {
   r = parseInt(res[0])
   g = parseInt(res[1])
   b = parseInt(res[2])
-  if (res.length > 3) {
+  if (res.length === 4) {
+    a = parseInt(parseFloat("0." + res[3])*255)
+  } else if (res.length === 5) {
     a = parseInt(parseFloat(res[3] + "." + res[4])*255)
   } else {
     a = 255

@@ -1,7 +1,7 @@
 {
   "id": "8afe591f",
   "name": "Fill Color Black or White",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "no description",
   "summary": "Changes the fill color of an object to black or white with keyboard shortcuts. Also adds the option to fill a selection with an rgb or rgba snippet from the browser.",
   "languages": ["en"],
