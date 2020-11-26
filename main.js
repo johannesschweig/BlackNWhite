@@ -1,6 +1,6 @@
 const {Color} = require("scenegraph")
 
-const { getRGBA, fill, findReplaceElements, rgbaHTML, textHTML, fontColorHTML } = require("./utils.js")
+const { getRGBA, fill, findElements, findReplaceElements, rgbaHTML, textHTML, fontColorHTML } = require("./utils.js")
 
 // dialogs
 let dialogs = {
@@ -96,12 +96,28 @@ function fillWhite(selection) {
   fill(selection, new Color("#ffffff"))
 }
 
+function toggleFill(selection) {
+  let elements = findElements(selection.items)
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].fillEnabled = !elements[i].fillEnabled
+  }
+}
+
+function toggleBorder(selection) {
+  let elements = findElements(selection.items)
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].strokeEnabled = !elements[i].strokeEnabled
+  }
+}
+
 module.exports = {
   commands: {
     fillBlack: fillBlack,
     fillWhite: fillWhite,
     fillRGBA: getRGBADialog,
     batchText: getTextDialog,
-    fontColor: getFontColorDialog
+    fontColor: getFontColorDialog,
+    toggleFill: toggleFill,
+    toggleBorder: toggleBorder
   }
 }

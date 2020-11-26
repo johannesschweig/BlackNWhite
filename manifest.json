@@ -1,9 +1,9 @@
 {
   "id": "8afe591f",
   "name": "Fill Color Black or White",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "no description",
-  "summary": "Changes the fill color of an object to black or white with keyboard shortcuts. Also adds the option to fill a selection with an rgb or rgba snippet from the browser.",
+  "summary": "Changes the fill color of an object to black or white with keyboard shortcuts. Also adds other useful shortcuts.",
   "languages": ["en"],
   "author": "Johannes Schweig",
   "helpUrl": "https://mywebsite.com/help",
@@ -17,8 +17,7 @@
       "label": "Fill Black",
       "commandId": "fillBlack",
       "shortcut": {
-        "mac": "Cmd+Shift+b",
-        "win": "Ctrl+Shift+b"
+        "mac": "Cmd+Shift+b"
       }
     },
     {
@@ -26,8 +25,7 @@
       "label": "Fill White",
       "commandId": "fillWhite",
       "shortcut": {
-        "mac": "Cmd+Shift+w",
-        "win": "Ctrl+Shift+w"
+        "mac": "Cmd+Shift+w"
       }
     },
     {
@@ -45,8 +43,23 @@
       "label": "Set text in selection",
       "commandId": "batchText",
       "shortcut": {
-        "mac": "Cmd+alt+t",
-        "win": "Ctrl+alt+t"
+        "mac": "Cmd+shift+u"
+      }
+    },
+    {
+      "type": "menu",
+      "label": "Toggle Fill On/Off",
+      "commandId": "toggleFill",
+      "shortcut": {
+        "mac": "Cmd+shift+f"
+      }
+    },
+    {
+      "type": "menu",
+      "label": "Toggle Border On/Off",
+      "commandId": "toggleBorder",
+      "shortcut": {
+        "mac": "Cmd+shift+j"
       }
     }
   ]

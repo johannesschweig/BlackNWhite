@@ -1,8 +1,8 @@
 # TODO
 - change alignment of font color dialog
-- add shortcuts for toggling fill/border on/off
 
 # DONE
+- add shortcuts for toggling fill/border on/off (v0.08)
 - rgba also working if 0 is omitted for opacity (v0.07)
 - replace text working again (v0.06)
 - add a dialog that shows if a backgorund object should be overlayed with white or black text (v0.06)

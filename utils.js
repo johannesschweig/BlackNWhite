@@ -201,6 +201,7 @@ module.exports = {
   findReplaceElements,
   rgbaHTML,
   textHTML,
-  fontColorHTML
+  fontColorHTML,
+  findElements
 };
 
