@@ -71,6 +71,19 @@ function findReplaceElements(selection, textArr) {
   })
 }
 
+// returns a semicolon-separated string with text of all elements
+function getTextElements(selection) {
+  let str = ''
+  let elements = findElements(selection.items)
+  elements = elements.sort(sortXY)
+  elements.forEach(function (e) {
+    if (e.constructor.name === 'Text') {
+      str += e.text + ';'
+    }
+  })
+  return str
+}
+
 const rgbaHTML = `
       <style>
         label {
@@ -202,6 +215,7 @@ module.exports = {
   rgbaHTML,
   textHTML,
   fontColorHTML,
-  findElements
+  findElements,
+  getTextElements
 };
 

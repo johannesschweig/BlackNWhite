@@ -1,6 +1,7 @@
 const {Color} = require("scenegraph")
+let clipboard = require("clipboard")
 
-const { getRGBA, fill, findElements, findReplaceElements, rgbaHTML, textHTML, fontColorHTML } = require("./utils.js")
+const { getRGBA, fill, findElements, findReplaceElements, rgbaHTML, textHTML, fontColorHTML, getTextElements } = require("./utils.js")
 
 // dialogs
 let dialogs = {
@@ -72,6 +73,10 @@ function getTextDialog(selection) {
   return initDialog('text', selection)
 }
 
+function copyText(selection) {
+  clipboard.copyText(getTextElements(selection))
+}
+
 function getFontColorDialog(selection) {
   let dialog = 'fontColor'
   dialogs[dialog].html = fontColorHTML(selection)
@@ -116,6 +121,7 @@ module.exports = {
     fillWhite: fillWhite,
     fillRGBA: getRGBADialog,
     batchText: getTextDialog,
+    copyText: copyText,
     fontColor: getFontColorDialog,
     toggleFill: toggleFill,
     toggleBorder: toggleBorder
